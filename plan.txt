@@ -1,0 +1,18 @@
+n → n/2 (n is even)
+n → 3n + 1 (n is odd)
+
+Program will be made in Python for its dictionary.
+
+All numbers from 1-1000000 will be scored on chain length of their Collatz sequence.
+
+When a number is scored, the number and its score are put on the dictionary.
+
+If a number in the dictionary appears in a sequence, use the number and its pre-existing score to save on computing time.
+
+Actually, the next number in a sequence should be scored seperately as well.
+
+Make a recursive function.
+
+Maybe even start from 1000000 to get the most recursion possible, and then go down.
+
+Finally, check for the highest-scored number.
