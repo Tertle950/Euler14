@@ -16,8 +16,8 @@ def collatz(num):
             #odd
             x = ((num * 3) + 1)
         
-        print(x)
         collatzLen[x] = collatz(x) + 1
         return collatzLen[num]
 
+print(collatz(100))
 print(collatz(100))
