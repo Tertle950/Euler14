@@ -15,19 +15,25 @@ public class Main {
 
     
     // Time to solve
-    for(int i = 2; i <= 100; i++){
+    Scanner stdin = new Scanner(System.in);
+    System.out.print("Enter upper limit.\n? ");
+    int upperLimit = stdin.nextInt();
+    stdin.close();  
+
+    for(int i = 2; i <= upperLimit; i++){
       collatz(i);
     }
 
     Integer largest = 1;
     Integer collarg = collatzLen.get(largest);
-    for(int i = 2; i <= 100; i++){
+    for(int i = 2; i <= upperLimit; i++){
       if(collatzLen.get(i) > collarg){
         largest = i;
         collarg = collatzLen.get(i);
       }
     }
 
+    System.out.println(collatzLen);
     System.out.println(largest + " wins with " + collarg);
   }
 
