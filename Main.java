@@ -1,13 +1,10 @@
-package Iteration;
-//n → n/2 (n is even)
-//n → 3n + 1 (n is odd)
-
 // Import the HashMap class
 import java.util.*;
 
 public class Main {
   // Create a HashMap object for 
   static HashMap<Integer, Integer> collatzLen;
+  static final int RECURSE_MAX = 50;
   public static void main(String[] args) {
     collatzLen = new HashMap<Integer, Integer>();
 
@@ -22,7 +19,7 @@ public class Main {
     stdin.close();  
 
     for(int i = 2; i <= upperLimit; i++){
-      collatz(i);
+      collatz(i, 0);
     }
 
     Integer largest = 1;
@@ -38,17 +35,31 @@ public class Main {
     System.out.println(largest + " wins with " + collarg);
   }
 
-  public static Integer collatz(int x) {
+  public static Integer collatz(int x, int recurse) {
     Integer returner = collatzLen.get(x);
     if(returner == null){
-      if(x % 2 == 0){
-        // Even
-        returner = collatz(x / 2) + 1;
+      if(recurse < RECURSE_MAX){
+        if(x % 2 == 0){
+          // Even
+          returner = collatz(x / 2, recurse+1) + 1;
+        }else{
+          // Odd
+          returner = collatz((3*x) + 1, recurse+1) + 1;
+        }
       }else{
-        // Odd
-        returner = collatz((3*x) + 1) + 1;
+        int gonnaTry = x;
+        while(returner == null){
+          if(x % 2 == 0){
+            // Even
+            gonnaTry = gonnaTry / 2;
+          }else{
+            // Odd
+            gonnaTry = (3*gonnaTry) + 1;
+          }
+          returner = collatzLen.get(x);
+        }
+        returner++; // I had to add +1 here to prevent the null from becoming a 1.
       }
-
       collatzLen.put(x, returner);
     }
 
